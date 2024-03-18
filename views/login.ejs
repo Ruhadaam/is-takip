@@ -10,29 +10,29 @@
   <body class="bg-gray-100 h-screen flex items-center justify-center">
     <div class="max-w-md w-full bg-white p-8 rounded shadow-md">
       <h2 class="text-2xl font-semibold mb-6">Sign In</h2>
-      <form>
+      <form id="loginForm">
         <div class="mb-4">
           <label
-            for="email"
+            for="emailLogin"
             class="block text-gray-700 text-sm font-semibold mb-2"
             >Email Address</label
           >
           <input
             type="email"
-            id="email"
+            id="emailLogin"
             name="email"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
         <div class="mb-4">
           <label
-            for="password"
+            for="passwordLogin"
             class="block text-gray-700 text-sm font-semibold mb-2"
             >Password</label
           >
           <input
             type="password"
-            id="password"
+            id="passwordLogin"
             name="password"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
@@ -227,63 +227,81 @@
 
     <!-- Register modal End -->
     <script>
+let registerForm = document.getElementById("registerForm");
+let loginForm = document.getElementById("loginForm");
 
- 
+loginForm.onsubmit =  async function (event) {
+  event.preventDefault();
+  data = {
+    emailLogin: document.getElementById("emailLogin").value,
+    passwordLogin: document.getElementById("passwordLogin").value,
+  };
 
-  registerForm.onsubmit = function(event) {
-    event.preventDefault();
-    let registerForm = document.getElementById("registerForm");
+  console.log(data);
 
-data = {
+
+  try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+         body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          throw new Error('Kullanıcı adı veya şifre yanlış');
+        }
+
+        window.location.href = '/'; // Başarılıysa ana sayfaya yönlendir
+      } catch (error) {
+        console.error('Login error:', error);
+        alert(error.message);
+      }
+
+
+  
+  };
+
+  
+
+registerForm.onsubmit = function (event) {
+  event.preventDefault();
+
+  data = {
     firstNameRegister: document.getElementById("firstNameRegister").value,
     lastNameRegister: document.getElementById("lastNameRegister").value,
     emailRegister: document.getElementById("emailRegister").value,
     passwordRegister: document.getElementById("passwordRegister").value,
-    genderRegister: document.getElementById("genderRegister").value,      
+    genderRegister: document.getElementById("genderRegister").value,
     birthRegister: document.getElementById("birthRegister").value,
-  }
+  };
 
+  console.log(data);
 
-  console.log(data)
-   
-  fetch('/register', { 
-    method: 'POST', 
+  fetch("/register", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json' 
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data) 
+    body: JSON.stringify(data),
   })
-  .then(response => {
-
-
-  if (response.status === 400) {
-    console.log("veri tabanında bu mail zaten kayıtlı.")
-    return response.json();
-  } 
-  
-  else if (!response.ok) {
-    throw new Error('Network response was not ok');
-  } 
-  
-  else {
-    return response.json();
-  }
-})
-  .then(data => {
-  
-    console.log(data);
-  })
-  .catch(error => {
-    // Hata durumunda işlem yapın
-    console.error('Fetch Error:', error);
-  });
-
-
+    .then((response) => {
+      if (response.status === 400) {
+        console.log("veri tabanında bu mail zaten kayıtlı.");
+        return response.json();
+      } else if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      // Hata durumunda işlem yapın
+      console.error("Fetch Error:", error);
+    });
 };
-
-
-
-     
 
     </script>
     <script src="/flowbite/dist/flowbite.min.js"></script>

@@ -4,12 +4,23 @@ const db = require("./data/db");
 const path = require("path");
 const user = require("./models/users");
 const bodyParser = require("body-parser");
+const session = require("express-session");
+
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// express-session middleware'ini kullanarak session'ları yapılandırın
+app.use(session({
+  secret: 'your-secret-key', 
+  resave: false, 
+  saveUninitialized: false 
+}));
+
+
 app.set("view engine", "ejs");
 app.use(router);
 
