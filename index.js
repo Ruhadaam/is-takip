@@ -2,7 +2,7 @@ const express = require("express");
 const router = require("./routes/router");
 const db = require("./data/db");
 const path = require("path");
-const user = require("./models/users");
+const models = require("./models/models");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 

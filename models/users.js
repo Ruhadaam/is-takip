@@ -4,7 +4,10 @@ const sequelize = require("../data/db");
 //sequelize fonksiyonlarını çalıştırmak için
 const DataTypes = require("sequelize");
 
+
 const Role = require("./role");
+
+
 
 //user tablosunu oluşturmak için
 const User = sequelize.define("User", {
@@ -54,36 +57,8 @@ const User = sequelize.define("User", {
   },
 });
 
-User.belongsTo(Role, { foreignKey: "roleId" });
 
-async function createTables() {
-  await Role.sync({ alter: true });
-  await User.sync({ alter: true });
-}
 
-async function createData() {
-  // Role tablosunu kontrol ederek admin rolünü ekleyin
-  const adminRole = await Role.findOne({ where: { name: "admin" } });
-  if (!adminRole) {
-    User.create({
-      firstName: "Ruh",
-      lastName: "Adam",
-      email: "admin@gmail.com",
-      password: "123",
-      gender: "Male",
-      birthDate: "1990-01-01",
-      roleId: 1,
-    });
-  }
-  const userRole = await Role.findOne({ where: { name: "user" } });
-  if (!userRole) {
-    Role.create({
-      name: "user",
-    });
-  }
-}
 
-createTables();
-createData();
 
 module.exports = User;
