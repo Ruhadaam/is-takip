@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/users");
-
+const Role = require("../models/role");
 
 //session yoksa login sayfasına yönlendiren middleware
 const checkSession = (req, res, next) => {
@@ -38,12 +38,19 @@ router.get('/logout', (req, res) => {
 });
 
 
-router.get("/login", (req, res) => {
+router.get("/login", async (req, res) => {
    // Eğer oturum zaten varsa, direkt olarak ana sayfaya yönlendir
    if (req.session.user) {
     return res.redirect('/');
   }
-  res.render("login");
+
+  const roles = await Role.findAll();
+  data = {
+    roles:roles
+  }
+
+
+  res.render("login",data);
 });
 
 router.get("/dashboard", (req, res) => {
@@ -66,13 +73,21 @@ router.get("/tasks", (req, res) => {
 
 router.get("/users",  async (req, res) => {
   const users = await User.findAll();
+  const roles = await Role.findAll();
+  const roleMap = {};
+  roles.forEach(role => {
+      roleMap[role.id] = role.name;
+  });
+
   const data = {
     value: "./pages/users",
     title: "Users",
-    users: users // Kullanıcı verilerini veri nesnesine ekleyin
+    users: users,
+    roles: roles,
+    roleMap: roleMap
   };
 
-  res.render("index", data); // render() fonksiyonunu çağırırken sadece iki parametre kullanın
+  res.render("index", data);
 });
 
 
@@ -100,8 +115,7 @@ router.post("/register", async (req, res) => {
       birthDateRegister,
       roleRegister
     } = req.body;
-    console.log(roleRegister);
-
+    
     const existingUser = await User.findOne({
       where: { email: emailRegister },
     });
@@ -117,7 +131,7 @@ router.post("/register", async (req, res) => {
       password: passwordRegister,
       gender: genderRegister,
       birthDate: birthDateRegister,
-      role:roleRegister
+      roleId  :roleRegister
     });
 
     res.status(201).json(newUser); // Başarı durumunda oluşturulan kullanıcıyı yanıt olarak gönderin
@@ -152,11 +166,6 @@ router.post("/login", async (req, res) => {
 
 //GET DATA
 
-router.get("/user-data", async (req, res) => {
-  
-console.log(users);
-  res.send(users);
-});
 
 
 

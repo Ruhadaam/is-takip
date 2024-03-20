@@ -122,11 +122,23 @@
                       d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                   </svg>
                 </div>
-                <input datepicker datepicker-autohide type="text" id="birthRegister"
+                <input datepicker datepicker-autohide type="text" id="birthDateRegister"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Choose your birth date" />
               </div>
             </div>
+            <div class="mb-4">
+              <label for="roleRegister"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+              <select id="roleRegister"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <% roles.forEach(role=> { %>
+                      <option value="<%= role.id %>">
+                          <%= role.name %>
+                      </option>
+                      <% }) %>
+              </select>
+          </div>
             <div class="flex items-center justify-between">
               <button
                 class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-150 ease-in-out"
@@ -180,46 +192,61 @@
 
 
     registerForm.onsubmit = function (event) {
-      event.preventDefault();
+        event.preventDefault();
 
-      data = {
-        firstNameRegister: document.getElementById("firstNameRegister").value,
-        lastNameRegister: document.getElementById("lastNameRegister").value,
-        emailRegister: document.getElementById("emailRegister").value,
-        passwordRegister: document.getElementById("passwordRegister").value,
-        genderRegister: document.getElementById("genderRegister").value,
-        birthRegister: document.getElementById("birthRegister").value,
-      };
+        // Tarihi alın
+        let birthDateInput = document.getElementById("birthDateRegister").value;
+        let birthDateParts = birthDateInput.split("/"); // Örneğin: "dd/mm/yyyy" biçiminde
 
-      console.log(data);
+        // Türk tarih formatı kullanılıyorsa, doğru sıralamayı sağlamak için parçaları yer değiştirin
+        let birthDate = new Date(birthDateParts[2], birthDateParts[1] - 1, birthDateParts[0]);
 
-      fetch("/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => {
-          if (response.status === 400) {
-            console.log("veri tabanında bu mail zaten kayıtlı.");
-            return response.json();
-          } else if (!response.ok) {
-            throw new Error("Network response was not ok");
-          } else {
-            return response.json();
-          }
+        // Şimdi doğru tarih nesnesini kullanarak devam edebilirsiniz
+
+
+        let data = {
+            firstNameRegister: document.getElementById("firstNameRegister").value,
+            lastNameRegister: document.getElementById("lastNameRegister").value,
+            emailRegister: document.getElementById("emailRegister").value,
+            passwordRegister: document.getElementById("passwordRegister").value,
+            genderRegister: document.getElementById("genderRegister").value,
+            birthDateRegister: birthDate, // MySQL uyumlu tarih formatı
+            roleRegister: document.getElementById('roleRegister').value
+        };
+
+
+
+        fetch("/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
         })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          // Hata durumunda işlem yapın
-          console.error("Fetch Error:", error);
-        });
+            .then((response) => {
+                if (response.status === 400) {
+                    console.log("veri tabanında bu mail zaten kayıtlı.");
+                    return response.json();
+                } else if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                } else {
+                    return response.json();
+                }
+            })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                // Hata durumunda işlem yapın
+                console.error("Fetch Error:", error);
+            });
+
+
+
     };
 
-  </script>
+
+ </script>
   <script src="/flowbite/dist/flowbite.min.js"></script>
   <script src="/flowbite/dist/datepicker.js"></script>
 </body>

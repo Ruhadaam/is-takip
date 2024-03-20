@@ -1,58 +1,89 @@
-
 //db bilgilerini almak için
-const sequelize = require('../data/db');
+const sequelize = require("../data/db");
 
 //sequelize fonksiyonlarını çalıştırmak için
-const DataTypes = require('sequelize');
+const DataTypes = require("sequelize");
+
+const Role = require("./role");
 
 //user tablosunu oluşturmak için
-const User = sequelize.define('User', {
+const User = sequelize.define("User", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   firstName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   lastName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   gender: {
-    type: DataTypes.ENUM('Male', 'Female', 'Non-Binary', 'Other', 'I don\'t want to specify.'),
-    allowNull: true
+    type: DataTypes.ENUM(
+      "Male",
+      "Female",
+      "Non-Binary",
+      "Other",
+      "I don't want to specify."
+    ),
+    allowNull: true,
   },
   birthDate: {
     type: DataTypes.DATEONLY,
-    allowNull: true
+    allowNull: true,
   },
-  role: {
-    type: DataTypes.ENUM('Admin', 'User','Editor','Author','Designer'),
+  roleId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 'User' // Varsayılan olarak kullanıcı rolü
-  }
+    references: {
+      model: Role,
+      key: "id",
+    },
+  },
 });
 
+User.belongsTo(Role, { foreignKey: "roleId" });
 
-  
-
-
-async function sync() {
+async function createTables() {
+  await Role.sync({ alter: true });
   await User.sync({ alter: true });
-  console.log("User table synchronized with alterations.");
 }
-sync();
 
+async function createData() {
+  // Role tablosunu kontrol ederek admin rolünü ekleyin
+  const adminRole = await Role.findOne({ where: { name: "admin" } });
+  if (!adminRole) {
+    User.create({
+      firstName: "Ruh",
+      lastName: "Adam",
+      email: "admin@gmail.com",
+      password: "123",
+      gender: "Male",
+      birthDate: "1990-01-01",
+      roleId: 1,
+    });
+  }
+  const userRole = await Role.findOne({ where: { name: "user" } });
+  if (!userRole) {
+    Role.create({
+      name: "user",
+    });
+  }
+}
 
-  module.exports = User;
+createTables();
+createData();
+
+module.exports = User;
