@@ -1,5 +1,5 @@
 <div class="container mx-auto p-8">
-    <h1 class="text-3xl font-semibold text-center mb-8">Kullanıcı Listesi</h1>
+    <h1 class="text-3xl font-semibold text-center mb-8">Users List</h1>
 
     <!-- Kullanıcı Kartları Başlangıcı -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
@@ -9,9 +9,9 @@
 
                 <img class="w-24 h-24 rounded-full" src="/img/jhin.jpg" alt="Rounded avatar">
                 <h2 class="text-xl font-semibold mb-4"><%= user.firstName %> <%= user.lastName %>  </h2>
-                <p class="text-gray-600">E-mail: <%= user.email %></p>
-                <p class="text-gray-600">Gender: <%= user.gender %></p>
-                <p class="text-gray-600">Role: <%= user.role %></p>
+                <p class="text-gray-600 "> <span class="font-bold">E-mail</span>: <%= user.email %></p>
+                <p class="text-gray-600"><span class="font-bold">Gender:</span> <%= user.gender %></p>
+                <p class="text-gray-600"><span class="font-bold">Role:</span> <%= user.role %></p>
             </div>
         <% }) %>
         <!-- Örnek Kullanıcılar -->
@@ -33,7 +33,7 @@
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <!-- Modal header -->
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h2 class="text-xl font-semibold">Yeni Kullanıcı Ekle</h2>
+                        <h2 class="text-xl font-semibold">Add New User</h2>
                         <button type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             data-modal-hide="default-modal">

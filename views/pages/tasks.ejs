@@ -1,43 +1,103 @@
-
 <div class=" p-10 ">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Liste 1 -->
-        <div class="bg-white p-4 rounded-lg shadow-md">
-          <h2 class="font-bold mb-2">Liste Başlığı 1</h2>
-          <div class="space-y-2">
-            <!-- Todo öğesi -->
-            <div class="flex items-center">
-              <input type="checkbox" class="form-checkbox h-5 w-5 rounded-full border-gray-300 text-blue-600 focus:ring-0 mr-2">
-              <p class="cursor-pointer">Todo 1</p>
-            </div>
-            <!-- Daha fazla todo eklenebilir -->
-          </div>
-        </div>
-        <!-- Liste 2 -->
-        <!-- Yapı Liste 1 ile aynı, başlığı ve todoları değiştir -->
-        <!-- Liste 3 -->
-        <!-- Yapı Liste 1 ile aynı, başlığı ve todoları değiştir -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="max-w-full p-8 bg-white rounded-lg shadow w-96">
+      <div class="flex items-center mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0 0 32 32">
+          <path d="M 18.46875 3 L 16.59375 7.03125 C 16.394531 7.019531 16.199219 7 16 7 C 9.9375 7 5 11.9375 5 18 C 5 20.933594 6.148438 23.617188 8.03125 25.59375 L 6.46875 29 L 10 29 L 10.65625 27.59375 C 12.238281 28.476563 14.066406 29 16 29 C 22.0625 29 27 24.0625 27 18 C 27 14.144531 25.011719 10.746094 22 8.78125 L 22 3 Z M 15.6875 9 L 8.96875 23.59375 C 7.746094 22.058594 7 20.125 7 18 C 7 13.121094 10.847656 9.164063 15.6875 9 Z M 19 9.53125 L 19 15.5625 L 22 18.21875 L 22 11.3125 C 23.835938 12.957031 25 15.332031 25 18 C 25 22.980469 20.980469 27 16 27 C 14.351563 27 12.824219 26.550781 11.5 25.78125 L 13.6875 21 L 18 21 L 18 23 L 22 19.53125 L 18 16 L 18 18 L 15.0625 18 Z M 22 20.875 L 19 23.46875 L 19 24 L 22 24 Z"></path>
+        </svg>
+        
+        
+        
+        <h4 class="font-semibold ml-3 text-lg">Project A</h4>
       </div>
+      <div>
+        <input class="hidden" type="checkbox" id="task_1" checked>
+        <label class="flex items-center h-10 px-2 rounded cursor-pointer hover:bg-gray-100" for="task_1">
+          <span class="flex items-center justify-center w-5 h-5 text-transparent border-2 border-gray-300 rounded-full">
+            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          <span class="ml-4 text-sm">Attend Doctor Strange's magical lessons</span>
+        </label>
+      </div>
+      <div>
+        <input class="hidden" type="checkbox" id="task_2" checked>
+        <label class="flex items-center h-10 px-2 rounded cursor-pointer hover:bg-gray-100" for="task_2">
+          <span class="flex items-center justify-center w-5 h-5 text-transparent border-2 border-gray-300 rounded-full">
+            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          <span class="ml-4 text-sm">Take a bike ride with Captain America (can you keep up with his speed?)</span>
+        </label>
+      </div>
+      <div>
+        <input class="hidden" type="checkbox" id="task_3">
+        <label class="flex items-center h-10 px-2 rounded cursor-pointer hover:bg-gray-100" for="task_3">
+          <span class="flex items-center justify-center w-5 h-5 text-transparent border-2 border-gray-300 rounded-full">
+            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          <span class="ml-4 text-sm">Lift Thor's hammer with some exercise</span>
+        </label>
+      </div>
+      <div>
+        <input class="hidden" type="checkbox" id="task_4">
+        <label class="flex items-center h-10 px-2 rounded cursor-pointer hover:bg-gray-100" for="task_4">
+          <span class="flex items-center justify-center w-5 h-5 text-transparent border-2 border-gray-300 rounded-full">
+            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          <span class="ml-4 text-sm">Have a nail-cutting party with Wolverine</span>
+        </label>
+      </div>
+      <div>
+        <input class="hidden" type="checkbox" id="task_5">
+        <label class="flex items-center h-10 px-2 rounded cursor-pointer hover:bg-gray-100" for="task_5">
+          <span class="flex items-center justify-center w-5 h-5 text-transparent border-2 border-gray-300 rounded-full">
+            <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+              fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          <span class="ml-4 text-sm">Challenge Thanos to a thumb war (Infinity Gauntlet not allowed)</span>
+        </label>
+      </div>
+
+    </div>
     
-      <script>
-        // Todo'ya tıklama ile checkbox etkileşimi
-        document.querySelectorAll('.space-y-2 div').forEach(todoDiv => {
-          todoDiv.addEventListener('click', function() {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-            checkbox.dispatchEvent(new Event('change'));
-          });
-        });
-    
-        // Checkbox işaretlendiğinde todo'nun üstünü çizme
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-          checkbox.addEventListener('change', function() {
-            if (this.checked) {
-              this.nextElementSibling.classList.add('line-through');
-            } else {
-              this.nextElementSibling.classList.remove('line-through');
-            }
-          });
-        });
-      </script>
+
+  </div>
+
+
 </div>
+
+<style>
+  input[type=checkbox]:checked+label span:first-of-type {
+    background-color: #10B981;
+    border-color: #10B981;
+    color: #fff;
+  }
+
+  input[type=checkbox]:checked+label span:nth-of-type(2) {
+    text-decoration: line-through;
+    color: #9CA3AF;
+  }
+</style>
