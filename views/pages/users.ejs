@@ -1,1 +1,182 @@
-<h1 class="text-cyan-700 text-3xl">Burası users sayfasıdır</h1>
+<div class="container mx-auto p-8">
+    <h1 class="text-3xl font-semibold text-center mb-8">Kullanıcı Listesi</h1>
+
+    <!-- Kullanıcı Kartları Başlangıcı -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+
+        <% users.forEach(user => { %>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+
+                <img class="w-24 h-24 rounded-full" src="/img/jhin.jpg" alt="Rounded avatar">
+                <h2 class="text-xl font-semibold mb-4"><%= user.firstName %> <%= user.lastName %>  </h2>
+                <p class="text-gray-600">E-mail: <%= user.email %></p>
+                <p class="text-gray-600">Gender: <%= user.gender %></p>
+                <p class="text-gray-600">Role: <%= user.role %></p>
+            </div>
+        <% }) %>
+        <!-- Örnek Kullanıcılar -->
+      
+      
+        <div data-modal-target="default-modal" data-modal-toggle="default-modal"
+            class="relative border-4 border-dashed rounded-lg p-6 text-center hover:bg-gray-200 transition duration-300">
+            <svg class="w-12 h-12 text-gray-800 dark:text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition duration-300 hover:scale-125"
+                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 12h14m-7 7V5" />
+            </svg>
+        </div>
+        <!-- Main modal -->
+        <div id="default-modal" tabindex="-1" aria-hidden="true"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h2 class="text-xl font-semibold">Yeni Kullanıcı Ekle</h2>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-hide="default-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-4 md:p-5 space-y-4">
+                        <!-- Yeni Kullanıcı Ekleme Formu -->
+
+                        <form class="max-w-md mx-auto" id="registerForm">
+                            <div class="mb-4">
+                                <label for="firstNameRegister" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                                <input type="text" id="firstNameRegister" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+                            </div>
+                            <div class="mb-4">
+                                <label for="lastNameRegister" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                                <input type="text" id="lastNameRegister" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required />
+                            </div>
+                            <div class="mb-4">
+                                <label for="emailRegister" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input type="email" id="emailRegister" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john@example.com" required />
+                            </div>
+                            <div class="mb-4">
+                                <label for="passwordRegister" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input type="password" id="passwordRegister" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="********" required />
+                            </div>
+                            <div class="mb-4">
+                                <label for="genderRegister" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+                                <select id="genderRegister" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Non-Binary">Non-Binary</option>
+                                    <option value="Other">Other</option>
+                                    <option value="I don't want to specify.">I don't want to specify.</option>
+                                </select>
+                            </div>
+                            <label for="birthRegister" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birth Date</label>
+
+                            <div class="relative max-w-full">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                      d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                  </svg>
+                                </div>
+                                <input datepicker datepicker-autohide type="text" id="birthRegister"
+                                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  placeholder="Choose your birth date" />
+                              </div>
+
+                              <div class="mb-4">
+                                <label for="roleRegister" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                                <select id="roleRegister" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="User">User</option>
+                                    <option value="Editor">Editor</option>
+                                    <option value="Author">Author</option>
+                                    <option value="Designer">Designer</option>
+                                </select>
+                            </div>
+
+                     
+
+
+                        <!-- Yeni Kullanıcı Ekleme Formu Sonu -->
+                    </div>
+                    <!-- Modal footer -->
+                    <div
+                        class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="default-modal" type="button"
+                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
+                        <div class="flex-grow"></div> <!-- Boşluk eklemek için -->
+                        <button data-modal-hide="default-modal" type="submit"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
+                            New User</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- Kullanıcı Kartları Sonu -->
+
+
+</div>
+
+<script>
+    let registerForm = document.getElementById("registerForm");
+
+ registerForm.onsubmit = function (event) {
+  event.preventDefault();
+
+  data = {
+    firstNameRegister: document.getElementById("firstNameRegister").value,
+    lastNameRegister: document.getElementById("lastNameRegister").value,
+    emailRegister: document.getElementById("emailRegister").value,
+    passwordRegister: document.getElementById("passwordRegister").value,
+    genderRegister: document.getElementById("genderRegister").value,
+    birthRegister: document.getElementById("birthRegister").value,
+    roleRegister: document.getElementById('roleRegister').value
+  };
+
+  console.log(data);
+
+  fetch("/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (response.status === 400) {
+        console.log("veri tabanında bu mail zaten kayıtlı.");
+        return response.json();
+      } else if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      // Hata durumunda işlem yapın
+      console.error("Fetch Error:", error);
+    });
+};
+
+
+</script>
+<!--GET DATA SCRIPTS-->
+<script>
+ 
+</script>

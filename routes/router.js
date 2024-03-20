@@ -64,15 +64,17 @@ router.get("/tasks", (req, res) => {
   res.render("index", data);
 });
 
-router.get("/users", (req, res) => {
+router.get("/users",  async (req, res) => {
+  const users = await User.findAll();
   const data = {
     value: "./pages/users",
-
     title: "Users",
+    users: users // Kullanıcı verilerini veri nesnesine ekleyin
   };
 
-  res.render("index", data);
+  res.render("index", data); // render() fonksiyonunu çağırırken sadece iki parametre kullanın
 });
+
 
 router.get("/profile", (req, res) => {
   const data = {
@@ -96,7 +98,9 @@ router.post("/register", async (req, res) => {
       passwordRegister,
       genderRegister,
       birthDateRegister,
+      roleRegister
     } = req.body;
+    console.log(roleRegister);
 
     const existingUser = await User.findOne({
       where: { email: emailRegister },
@@ -113,6 +117,7 @@ router.post("/register", async (req, res) => {
       password: passwordRegister,
       gender: genderRegister,
       birthDate: birthDateRegister,
+      role:roleRegister
     });
 
     res.status(201).json(newUser); // Başarı durumunda oluşturulan kullanıcıyı yanıt olarak gönderin
@@ -142,6 +147,15 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error("Giriş yapmaya çalışırken bir hatayla karşılaşıldı:", error);
     res.status(500).json({ error: "Giriş yapmaya çalışırken bir hatayla karşılaşıldı" }); }
+});
+
+
+//GET DATA
+
+router.get("/user-data", async (req, res) => {
+  
+console.log(users);
+  res.send(users);
 });
 
 

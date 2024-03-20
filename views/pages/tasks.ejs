@@ -1,1 +1,43 @@
-<h1 class="text-cyan-700 text-3xl">Burası tasks sayfasıdır</h1>
+
+<div class=" p-10 ">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Liste 1 -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h2 class="font-bold mb-2">Liste Başlığı 1</h2>
+          <div class="space-y-2">
+            <!-- Todo öğesi -->
+            <div class="flex items-center">
+              <input type="checkbox" class="form-checkbox h-5 w-5 rounded-full border-gray-300 text-blue-600 focus:ring-0 mr-2">
+              <p class="cursor-pointer">Todo 1</p>
+            </div>
+            <!-- Daha fazla todo eklenebilir -->
+          </div>
+        </div>
+        <!-- Liste 2 -->
+        <!-- Yapı Liste 1 ile aynı, başlığı ve todoları değiştir -->
+        <!-- Liste 3 -->
+        <!-- Yapı Liste 1 ile aynı, başlığı ve todoları değiştir -->
+      </div>
+    
+      <script>
+        // Todo'ya tıklama ile checkbox etkileşimi
+        document.querySelectorAll('.space-y-2 div').forEach(todoDiv => {
+          todoDiv.addEventListener('click', function() {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            checkbox.dispatchEvent(new Event('change'));
+          });
+        });
+    
+        // Checkbox işaretlendiğinde todo'nun üstünü çizme
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+          checkbox.addEventListener('change', function() {
+            if (this.checked) {
+              this.nextElementSibling.classList.add('line-through');
+            } else {
+              this.nextElementSibling.classList.remove('line-through');
+            }
+          });
+        });
+      </script>
+</div>
