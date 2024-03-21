@@ -20,10 +20,6 @@ const Project = sequelize.define("Projects", {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
   createdById: {
     type: DataTypes.INTEGER,
     allowNull: false,

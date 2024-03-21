@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/users");
 const Role = require("../models/role");
+const Task = require("../models/projects");
+const Project = require("../models/tasks");
+const { where } = require("sequelize");
 
 //session yoksa login sayfasına yönlendiren middleware
 const checkSession = (req, res, next) => {
@@ -62,10 +65,14 @@ router.get("/dashboard", (req, res) => {
   res.render("index", data);
 });
 
-router.get("/tasks", (req, res) => {
+router.get("/tasks", async (req, res) => {
+  const project = await Project.findAll();
+  const task =  await Task.findAll();
   const data = {
     value: "./pages/tasks",
     title: "Tasks",
+    projects :project ,
+    tasks:task
   };
 
   res.render("index", data);
